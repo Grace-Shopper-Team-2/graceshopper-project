@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import AuthForm from '../features/auth/AuthForm';
 import Home from '../features/home/Home';
-import { me } from './store';
+// import { me } from './store';
 
 /**
  * COMPONENT
@@ -14,7 +14,7 @@ const AppRoutes = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(me());
+    // dispatch(me());
   }, []);
 
   return (
