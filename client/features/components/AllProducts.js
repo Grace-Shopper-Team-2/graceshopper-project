@@ -18,12 +18,13 @@ export default function AllProducts() {
       <ul>
         {products.map(({ name, type, price, description, imageUrl, id }) => (
           <li key={id}>
-            <h3>All Products</h3>
             <strong>{name}</strong>
+            &nbsp; &nbsp; &nbsp; &nbsp;
             <img src={imageUrl} />
             <p>Type: {type}</p>
             <p>Description: {description}</p>
-            <p>Price: {price}</p>
+            <p>Price: ${price}</p>
+            &nbsp; &nbsp;
           </li>
         ))}
       </ul>
