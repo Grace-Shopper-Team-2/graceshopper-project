@@ -2,10 +2,7 @@ import axios from "axios";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 //initial state has products array and state of null
-const initialState = {
-  products: [],
-  status: null,
-};
+const initialState = [];
 
 //action to fetch all products from database using asyncThunk
 export const fetchProducts = createAsyncThunk(
@@ -15,7 +12,6 @@ export const fetchProducts = createAsyncThunk(
       const { data } = await axios.get("/api/products");
       return data;
     } catch (err) {
-      console.log("Hello!");
       return err.message;
     }
   }
@@ -27,19 +23,9 @@ const productsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder
-      .addCase(fetchProducts.pending, (state, action) => {
-        state.status = "pending";
-        console.log(action);
-        console.log(state);
-      })
-      .addCase(fetchProducts.fulfilled, (state, action) => {
-        state.status = "success";
-        state.products = action.payload;
-      })
-      .addCase(fetchProducts.rejected, (state, action) => {
-        state.status = "rejected";
-      });
+    builder.addCase(fetchProducts.fulfilled, (state, action) => {
+      return action.payload;
+    });
   },
 });
 

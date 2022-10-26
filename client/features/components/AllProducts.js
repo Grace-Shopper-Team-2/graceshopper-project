@@ -10,7 +10,6 @@ export default function AllProducts() {
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
-  console.log(products);
 
   return (
     <div>
