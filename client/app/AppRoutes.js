@@ -4,6 +4,8 @@ import { Route, Routes } from "react-router-dom";
 import AuthForm from "../features/auth/AuthForm";
 import Home from "../features/home/Home";
 import AllProducts from "../features/components/AllProducts";
+
+// o: was this an error? if not, please remember to remove unused code before CRs
 // import { me } from './store';
 
 /**

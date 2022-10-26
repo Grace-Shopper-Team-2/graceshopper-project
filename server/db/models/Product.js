@@ -9,6 +9,9 @@ const Product = db.define('product', {
       notEmpty: true
     }
   },
+  // o: if you will be using this for categories / filtering the best way to do this is
+  //  by having a table of categories and then having a foreign key on this table
+  //  that points to the id of the category in the categories table
   type:{ // initially, "type" will be wands, but if we want to branch out to other magical products, it might be smart to have a type field.
     type: Sequelize.STRING,
     allowNullL: false

@@ -80,6 +80,8 @@ async function seed() {
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);
+
+  // o: why are you returning this object here? is this being used anywhere?
   return {
     users: {
       cody: users[0],
