@@ -18,10 +18,10 @@ const Navbar = () => {
     dispatch(AllProducts());
     navigate("/products");
   };
-  const adminPage = () =>{
-    dispatch(AdminPage())
-    navigate("/adminPage")
-  }
+  const adminPage = () => {
+    dispatch(AdminPage());
+    navigate("/adminPage");
+  };
 
   const totalNumOfItemsInCart = (arr) => {
     let total = 0;
@@ -37,10 +37,8 @@ const Navbar = () => {
           <div>
             {/* The navbar will show these links after you log in */}
             <Link to="/home">Home</Link>
-            <Link to="/products" onClick={allProductsPage}>
-              Products
-            </Link>
-            <Link to= "/adminPage" onClick = {adminPage}>Admin Page</Link>
+            <Link to="/products">Products</Link>
+            <Link to="/adminPage">Admin Page</Link>
             <button type="button" onClick={logoutAndRedirectHome}>
               Logout
             </button>
@@ -51,12 +49,13 @@ const Navbar = () => {
             <Link to="/login">Login</Link>
             <Link to="/signup">Sign Up</Link>
             <Link to="/products">Products</Link>
-            <Link to= "/adminPage" onClick = {adminPage}>Admin Page</Link>
+            <Link to="/adminPage" onClick={adminPage}>
+              Admin Page
+            </Link>
             <Link to="/cart">
               {" "}
               {`Cart (${totalNumOfItemsInCart(cart.cartItems)})`}{" "}
             </Link>
-
           </div>
         )}
       </nav>
