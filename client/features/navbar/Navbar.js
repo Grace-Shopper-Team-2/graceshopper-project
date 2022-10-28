@@ -2,7 +2,6 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../app/store";
-import AllProducts from "../components/AllProducts";
 
 const Navbar = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
@@ -11,10 +10,6 @@ const Navbar = () => {
   const logoutAndRedirectHome = () => {
     dispatch(logout());
     navigate("/login");
-  };
-  const allProductsPage = () => {
-    dispatch(AllProducts());
-    navigate("/products");
   };
 
   return (
@@ -25,9 +20,7 @@ const Navbar = () => {
           <div>
             {/* The navbar will show these links after you log in */}
             <Link to="/home">Home</Link>
-            <Link to="/products" onClick={allProductsPage}>
-              Products
-            </Link>
+            <Link to="/products">Products</Link>
             <button type="button" onClick={logoutAndRedirectHome}>
               Logout
             </button>
@@ -41,7 +34,7 @@ const Navbar = () => {
           </div>
         )}
       </nav>
-      <hr />
+      {/* <hr /> */}
     </div>
   );
 };

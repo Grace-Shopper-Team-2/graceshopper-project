@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Route, Routes } from 'react-router-dom';
-import AuthForm from '../features/auth/AuthForm';
-import Home from '../features/home/Home';
-import AllProducts from '../features/components/AllProducts';
-import SingleProduct from '../features/components/SingleProduct';
-// import { me } from './store';
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Route, Routes } from "react-router-dom";
+import AuthForm from "../features/auth/AuthForm";
+import Home from "../features/home/Home";
+import AllProducts from "../features/products/AllProducts";
+import SingleProduct from "../features/products/SingleProduct";
+import { me } from "./store";
 
 /**
  * COMPONENT
@@ -16,7 +16,7 @@ const AppRoutes = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // dispatch(me());
+    dispatch(me());
   }, []);
 
   return (
@@ -26,12 +26,14 @@ const AppRoutes = () => {
           <Route path="/*" element={<Home />} />
           <Route to="/home" element={<Home />} />
           <Route to="/products" element={<AllProducts />} />
+          <Route to="/products/:productId" element={<SingleProduct />} />
         </Routes>
       ) : (
         <Routes>
           <Route
             path="/*"
-            element={<AuthForm name="login" displayName="Login" />}
+            element={<Home />}
+            // element={<AuthForm name="login" displayName="Login" />}
           />
           <Route
             path="/login"
