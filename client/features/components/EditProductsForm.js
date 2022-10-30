@@ -7,7 +7,6 @@ import {
   fetchSingleProduct,
 } from "../ProductsSlice/SingleProductsSlice";
 
-
 const EditProductForm = () => {
   const { productId } = useParams();
   const dispatch = useDispatch();
@@ -23,7 +22,11 @@ const EditProductForm = () => {
     id: singleProduct.id,
     name: singleProduct.name,
     description: singleProduct.description,
+    imageUrl: singleProduct.imageUrl,
+    price: singleProduct.price,
   };
+
+  console.log(singleProduct);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -41,19 +44,36 @@ const EditProductForm = () => {
       <Link to="/adminPage" onClick={adminPage}>
         Back to Admin Page
       </Link>
-      <p>{singleProduct.name}</p>
-      <p>{singleProduct.description}</p>
+      <h3>Current Information:</h3>
+      <p>
+        <strong>Name:</strong> {singleProduct.name}
+      </p>
+      <p>
+        <strong>Description:</strong> {singleProduct.description}
+      </p>
+      <p>
+        <strong>Price:</strong> ${singleProduct.price}
+      </p>
+      <p>
+        <strong>Type:</strong> {singleProduct.type}
+      </p>
+      <img src={singleProduct.imageUrl} width="100" height="100"></img>
 
       <form id="product-form" onSubmit={handleSubmit}>
-        <p>Edit Information:</p>
+        <h3>Edit Information:</h3>
 
-        <label htmlFor="productName">Name:</label>
+        <label htmlFor="productName">
+          <strong>Edit Name</strong>:
+        </label>
         <input
           type="text"
           name="productName"
           defaultValue={singleProduct.name}
           onChange={(event) => (productData.name = event.target.value)}
         ></input>
+        <label htmlFor="description">
+          <strong>Edit Description:</strong>
+        </label>
         <textarea
           type="text"
           name="description"
@@ -62,6 +82,36 @@ const EditProductForm = () => {
           rows="5"
           cols="50"
         ></textarea>
+        <label htmlFor="imageUrl">
+          <strong>Edit ImageUrl:</strong>
+        </label>
+        <textarea
+          type="text"
+          name="imageUrl"
+          defaultValue={singleProduct.imageUrl}
+          onChange={(event) => (productData.imageUrl = event.target.value)}
+          rows="1"
+          cols="70"
+        ></textarea>
+        <label htmlFor="price">
+          <strong>Edit Price:</strong>
+        </label>
+        <input
+          type="number"
+          name="price"
+          defaultValue={singleProduct.price}
+          onChange={(event) => (productData.price = event.target.value)}
+          step="any"
+        ></input>
+        <label htmlFor="type">
+          <strong>Type</strong>
+        </label>
+        <select
+          name="type"
+          onChange={(event) => (productData.type = event.target.value)}
+        >
+          <option value="wand">Wand</option>
+        </select>
         <button type="submit">Submit Changes</button>
       </form>
     </div>

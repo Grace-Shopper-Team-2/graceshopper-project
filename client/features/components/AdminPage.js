@@ -36,13 +36,15 @@ function AdminPage() {
         <ol>
           {products.map((currentProduct) => (
             <li key={currentProduct.id}>
-              <p>{currentProduct.name}</p>
-              <p>{currentProduct.description}</p>
-
+              <p><strong>Name:</strong> {currentProduct.name}</p>
+              <p><strong>Description:</strong> {currentProduct.description}</p>
+              <p><strong>Price:</strong> ${currentProduct.price}</p>
+              <p><strong>Type:</strong> {currentProduct.type}</p>
+              <p><strong>ID:</strong> {currentProduct.id}</p>
+              <img src={currentProduct.imageUrl} width="100" height="100"></img>
               <Link to={`/adminPage/product/${currentProduct.id}`}>
                 Edit Product
               </Link>
-
               <button
                 id="delete-button"
                 onClick={() => {
