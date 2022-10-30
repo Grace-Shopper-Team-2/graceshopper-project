@@ -17,6 +17,32 @@ export const fetchProducts = createAsyncThunk(
   }
 );
 
+//action to delete product from database
+export const deleteProductAsync = createAsyncThunk(
+  "deleteProduct",
+  async (id) => {
+    const { data } = await axios.delete(`api/products/${id}`);
+    return data;
+  }
+);
+
+//action to update product in database
+export const updateProductAsync = createAsyncThunk(
+  "updateProduct",
+  async (productData) => {
+    try {
+      console.log(productData)
+      const { data } = await axios.put(
+        `/api/products/${productData.id}`,
+        productData
+      );
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
+
 //make a products slice and export its reducer by default
 const productsSlice = createSlice({
   name: "products",

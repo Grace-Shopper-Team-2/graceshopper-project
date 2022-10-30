@@ -14,6 +14,7 @@ const Navbar = () => {
     dispatch(logout());
     navigate("/login");
   };
+
   const allProductsPage = () => {
     dispatch(AllProducts());
     navigate("/products");
@@ -22,6 +23,7 @@ const Navbar = () => {
     dispatch(AdminPage());
     navigate("/adminPage");
   };
+
 
   const totalNumOfItemsInCart = (arr) => {
     let total = 0;
@@ -52,6 +54,7 @@ const Navbar = () => {
             <Link to="/adminPage" onClick={adminPage}>
               Admin Page
             </Link>
+
             <Link to="/cart">
               {" "}
               {`Cart (${totalNumOfItemsInCart(cart.cartItems)})`}{" "}

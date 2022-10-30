@@ -18,6 +18,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+
 //find one specific user info
 router.get("/:id", async (req, res, next) => {
   try {
@@ -29,5 +30,17 @@ router.get("/:id", async (req, res, next) => {
     res.json(user);
   } catch (err) {
     next(err);
+  }
+});
+
+// delete student by id
+router.delete("/:id", async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.id);
+    await user.destroy();
+    res.send(user);
+  } catch (error) {
+    next(error);
+
   }
 });

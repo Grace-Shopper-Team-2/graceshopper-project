@@ -10,16 +10,14 @@ export const fetchUsers = createAsyncThunk("users", async () => {
   }
 });
 
-export const deleteUser = createAsyncThunk(
-  "deleteUser",
-  async(id) =>{
-    try{
-      const {data} = await axios.delete(`/api/users/${id}`)
-    }catch(error){
-      console.error(error)
-    }
+export const deleteUserAsync = createAsyncThunk("deleteUser", async (id) => {
+  try {
+    const { data } = await axios.delete(`/api/users/${id}`);
+    return data;
+  } catch (error) {
+    console.error(error);
   }
-)
+});
 
 const allUsersSlice = createSlice({
   name: "allUsers",
@@ -27,7 +25,7 @@ const allUsersSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchUsers.fulfilled, (state, action) => {
-      console.log("ap",action.payload)
+      console.log("ap", action.payload);
       return action.payload;
     });
   },

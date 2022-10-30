@@ -4,8 +4,13 @@ import { Route, Routes } from "react-router-dom";
 import AuthForm from "../features/auth/AuthForm";
 import Home from "../features/home/Home";
 import AllProducts from "../features/components/AllProducts";
+
 import SingleProduct from "../features/components/SingleProduct";
 
+import AdminPage from "../features/components/AdminPage";
+
+
+import SingleProduct from "../features/products/SingleProduct";
 import AdminPage from "../features/components/AdminPage";
 
 import Cart from "../features/components/Cart";
@@ -30,8 +35,10 @@ const AppRoutes = () => {
         <Routes>
           <Route path="/*" element={<Home />} />
 
+          <Route path="/cart" element={<Cart />} />
           <Route path="/home" element={<Home />} />
           <Route path="/products" element={<AllProducts />} />
+          <Route path="/products/:productId" element={<SingleProduct />} />
           <Route path="/adminPage" element={<AdminPage />} />
         </Routes>
       ) : (
@@ -49,11 +56,8 @@ const AppRoutes = () => {
             element={<AuthForm name="signup" displayName="Sign Up" />}
           />
           <Route path="/products" element={<AllProducts />} />
-
-          <Route path="/cart" element={<Cart />} />
-
           <Route path="/products/:productId/*" element={<SingleProduct />} />
-
+          <Route path="/cart" element={<Cart />} />
           <Route path="/adminPage" element={<AdminPage />} />
         </Routes>
       )}
