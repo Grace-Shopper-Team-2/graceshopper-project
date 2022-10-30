@@ -10,7 +10,7 @@ function AllProducts() {
   const products = useSelector((state) => state.products);
 
   //we can check if user is logged in by using useSelector
-  const user = useSelector((state) => state.auth.me);
+  const { id } = useSelector((state) => state.auth.me);
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -20,7 +20,7 @@ function AllProducts() {
   //if user exist, we dispatch addToUserCart and add it to database, else, we dispatch addToCart which adds product to localstorage
   const handleAddToCart = (product, userId) => {
     if (userId) {
-      dispatch(addToUserCart(product, userId));
+      dispatch(addToUserCart({ product, userId }));
     } else {
       dispatch(addToCart(product));
     }
@@ -39,7 +39,7 @@ function AllProducts() {
             <p>Type: {product.type}</p>
             <p>Description: {product.description}</p>
             <p>Price: ${product.price}</p>
-            <button onClick={() => handleAddToCart(product, user.id)}>
+            <button onClick={() => handleAddToCart(product, id)}>
               Add To Cart
             </button>
             &nbsp; &nbsp;
