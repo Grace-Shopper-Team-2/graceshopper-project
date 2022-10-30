@@ -9,13 +9,18 @@ const initialState = {
 };
 
 //add items to user's cart based on userID
-export const addToUserCart = createAsyncThunk("cart/add", async (id) => {
-  try {
-    const { data } = await axios.get(`/api/`);
-  } catch (err) {
-    console.error("adding to cart failed, err.message");
+export const addToUserCart = createAsyncThunk(
+  "cart/add",
+  async (product, userId) => {
+    try {
+      console.log(product, userId);
+      const { data } = await axios.put(`/api/:/${userId}/cart`, product);
+      return data;
+    } catch (err) {
+      console.error("adding to cart failed, err.message");
+    }
   }
-});
+);
 
 //cart for user slice
 const cartForUserSlice = createSlice({
@@ -23,10 +28,11 @@ const cartForUserSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(addToUserCart);
+    builder.addCase(addToUserCart.fulfilled, (state, action) => {
+      state.cartItems.push(action.payload);
+      state.cartTotalQuantity++;
+    });
   },
 });
 
-export const {} = cartForUserSlice.actions;
-
-export default cartSlice.reducer;
+export default cartForUserSlice.reducer;
