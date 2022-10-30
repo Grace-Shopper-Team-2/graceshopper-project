@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
+import { Link } from "react-router-dom";
 import {
   fetchProducts,
   deleteProductAsync,
 } from "../ProductsSlice/ProductsSlice";
 import { fetchUsers, deleteUserAsync } from "../UserSlice/allUsersSlice";
-import EditProductForm from "./EditProductsForm";
 
 function AdminPage() {
   const dispatch = useDispatch();
@@ -35,26 +34,25 @@ function AdminPage() {
       <div id="admin-all-products">
         <strong>Edit Products</strong>
         <ol>
-          {products.map(
-            (currentProduct) => (
-              <li key={currentProduct.id}>
+          {products.map((currentProduct) => (
+            <li key={currentProduct.id}>
+              <p>{currentProduct.name}</p>
+              <p>{currentProduct.description}</p>
 
-                <EditProductForm product = {currentProduct}/>
-                <p>
-                  {currentProduct.name} || Type: {currentProduct.type} || Price: ${currentProduct.price}
-                </p>
-                <p>{currentProduct.description}</p>
-                <button
-                  id="delete-button"
-                  onClick={() => {
-                    handleProductDelete(currentProduct.id);
-                  }}
-                >
-                  Delete Product
-                </button>
-              </li>
-            )
-          )}
+              <Link to={`/adminPage/product/${currentProduct.id}`}>
+                Edit Product
+              </Link>
+
+              <button
+                id="delete-button"
+                onClick={() => {
+                  handleProductDelete(currentProduct.id);
+                }}
+              >
+                Delete Product
+              </button>
+            </li>
+          ))}
         </ol>
       </div>
 
