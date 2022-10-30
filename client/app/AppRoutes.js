@@ -1,18 +1,19 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Route, Routes } from 'react-router-dom';
-import AuthForm from '../features/auth/AuthForm';
-import Home from '../features/home/Home';
-import AllProducts from '../features/components/AllProducts';
-import SingleProduct from '../features/components/SingleProduct';
-
-import AdminPage from '../features/components/AdminPage';
-
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Route, Routes } from "react-router-dom";
+import AuthForm from "../features/auth/AuthForm";
+import Home from "../features/home/Home";
+import AllProducts from "../features/components/AllProducts";
+import SingleProduct from "../features/components/SingleProduct";
+import AdminPage from "../features/components/AdminPage";
 import Cart from "../features/components/Cart";
 import EditProductForm from '../features/components/EditProductsForm';
 
 
-// import { me } from './store';
+
+import Cart from "../features/components/Cart";
+
+import { me } from "./store";
 
 /**
  * COMPONENT
@@ -23,7 +24,7 @@ const AppRoutes = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // dispatch(me());
+    dispatch(me());
   }, []);
 
   return (
@@ -31,10 +32,11 @@ const AppRoutes = () => {
       {isLoggedIn ? (
         <Routes>
           <Route path="/*" element={<Home />} />
-          <Route to="/cart" element={<Cart />} />
-          <Route to="/home" element={<Home />} />
-          <Route to="/products" element={<AllProducts />} />
-          <Route to= "/adminPage" element = {<AdminPage />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/products" element={<AllProducts />} />
+          <Route path="/products/:productId" element={<SingleProduct />} />
+          <Route path="/adminPage" element={<AdminPage />} />
           <Route path = "/adminPage/product/:productId" element = {<EditProductForm />} />
         </Routes>
       ) : (
@@ -52,14 +54,10 @@ const AppRoutes = () => {
             element={<AuthForm name="signup" displayName="Sign Up" />}
           />
           <Route path="/products" element={<AllProducts />} />
-
-          <Route path="/cart" element={<Cart />} />
-
           <Route path="/products/:productId/*" element={<SingleProduct />} />
-
           <Route path= "/adminPage" element = {<AdminPage />} />
           <Route path = "/adminPage/product/:productId" element = {<EditProductForm />} />
-
+          <Route path="/cart" element={<Cart />} />
         </Routes>
       )}
     </div>

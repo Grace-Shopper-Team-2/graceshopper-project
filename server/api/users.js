@@ -18,6 +18,21 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+
+//find one specific user info
+router.get("/:id", async (req, res, next) => {
+  try {
+    const user = await User.findOne({
+      where: {
+        id: req.params.id,
+      },
+    });
+    res.json(user);
+  } catch (err) {
+    next(err);
+  }
+});
+
 // delete student by id
 router.delete("/:id", async (req, res, next) => {
   try {
@@ -26,5 +41,6 @@ router.delete("/:id", async (req, res, next) => {
     res.send(user);
   } catch (error) {
     next(error);
+
   }
 });

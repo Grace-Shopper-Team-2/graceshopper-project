@@ -6,11 +6,6 @@ const User = require("./models/User");
 const Product = require("./models/Product");
 const Cart = require("./models/Cart");
 
-//Association between User and Product with shared table called 'User_Product'
-//many to many
-User.belongsToMany(Product, { through: "user_product" });
-Product.belongsToMany(User, { through: "user_product" });
-
 //Association between User and Cart
 //one to one
 User.hasOne(Cart);
@@ -20,8 +15,6 @@ Cart.belongsTo(User);
 //one to many
 Cart.belongsToMany(Product, { through: "cart_product" });
 Product.belongsToMany(Cart, { through: "cart_product" });
-
-
 
 module.exports = {
   db,

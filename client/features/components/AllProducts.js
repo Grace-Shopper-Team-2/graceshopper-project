@@ -3,18 +3,27 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../productsSlice/productsSlice";
 import { addToCart, getTotal } from "../cartSlice/cartSlice";
+import { addToUserCart } from "../cartSlice/cartForUser";
 
 function AllProducts() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
+
+  //we can check if user is logged in by using useSelector
+  const { id } = useSelector((state) => state.auth.me);
 
   useEffect(() => {
     dispatch(fetchProducts());
     dispatch(getTotal());
   }, [dispatch]);
 
-  const handleAddToCart = (product) => {
-    dispatch(addToCart(product));
+  //if user exist, we dispatch addToUserCart and add it to database, else, we dispatch addToCart which adds product to localstorage
+  const handleAddToCart = (product, userId) => {
+    if (userId) {
+      dispatch(addToUserCart({ product, userId }));
+    } else {
+      dispatch(addToCart(product));
+    }
   };
 
   return (
@@ -22,7 +31,6 @@ function AllProducts() {
       <h1>All Products: </h1>
 
       <ul>
-
         {products.map((product) => (
           <li key={product.id}>
             <strong>{product.name}</strong>
@@ -31,11 +39,10 @@ function AllProducts() {
             <p>Type: {product.type}</p>
             <p>Description: {product.description}</p>
             <p>Price: ${product.price}</p>
-            <button onClick={() => handleAddToCart(product)}>
+            <button onClick={() => handleAddToCart(product, id)}>
               Add To Cart
             </button>
             &nbsp; &nbsp;
-
           </li>
         ))}
       </ul>
