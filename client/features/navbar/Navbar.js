@@ -2,8 +2,8 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../app/store";
-import AllProducts from "../components/AllProducts";
-import AdminPage from "../components/AdminPage";
+import AllProducts from "../allProducts/AllProducts";
+import AdminPage from "../admin/AdminPage";
 
 const Navbar = () => {
   const cart = useSelector((state) => state.cart);

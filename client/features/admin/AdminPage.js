@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../ProductsSlice/ProductsSlice";
-import { fetchUsers } from "../UserSlice/allUsersSlice";
+import { fetchProducts } from "../allProducts/ProductsSlice";
+import { fetchUsers } from "./allUsersSlice";
 
 function AdminPage() {
   const dispatch = useDispatch();

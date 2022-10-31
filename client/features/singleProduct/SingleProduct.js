@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   selectSingleProduct,
   fetchSingleProduct,
-} from "../ProductsSlice/SingleProductsSlice";
+} from "../singleProduct/SingleProductsSlice";
 
 function SingleProduct() {
   const { productId } = useParams();

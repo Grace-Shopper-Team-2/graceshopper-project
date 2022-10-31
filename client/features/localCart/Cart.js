@@ -7,7 +7,7 @@ import {
   decreaseCart,
   getTotal,
   removeFromCart,
-} from "../cartSlice/cartSlice";
+} from "./cartSlice";
 
 const Cart = () => {
   //use useSelector to select cart from our state

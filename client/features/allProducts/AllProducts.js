@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../productsSlice/productsSlice";
-import { addToCart, getTotal } from "../cartSlice/cartSlice";
-import { addToUserCart } from "../cartSlice/cartForUser";
+import { fetchProducts } from "./ProductsSlice";
+import { addToCart, getTotal } from "../localCart/cartSlice";
+import { addToUserCart } from "../userCart/cartForUser";
 
 function AllProducts() {
   const dispatch = useDispatch();
