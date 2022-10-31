@@ -16,13 +16,13 @@ export const addToUserCart = createAsyncThunk(
       //first check if cart exist by sending get request
       const res = await axios.get(`api/user/${userId}/cart`);
       console.log(res);
-      //if it doesn't we create a cart with the userId and return it
-      if (res.status === 404) {
-        const { data } = await axios.post(`api/user/${userId}/cart`, product);
-        return data;
-        //if it does, we update it with the product passed in as req.body
-      } else {
-        const { data } = await axios.put(`/api/user/${userId}/cart`, product);
+
+      if (res.data) {
+        const { data } = await axios.put(
+          `/api/user/${userId}/cart`,
+          product.id
+        );
+
         return data;
       }
     } catch (err) {
@@ -38,8 +38,15 @@ const cartForUserSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(addToUserCart.fulfilled, (state, action) => {
-      state.cartItems.push(action.payload);
-      state.cartTotalQuantity++;
+      const itemIndex = state.cartItems.findIndex(
+        (item) => item.id === action.payload.id
+      );
+      if (itemIndex >= 0) {
+        state.cartItems[itemIndex].cartQuantity++;
+      } else {
+        const tempProduct = { ...action.payload, cartQuantity: 1 };
+        state.cartItems.push(tempProduct);
+      }
     });
   },
 });

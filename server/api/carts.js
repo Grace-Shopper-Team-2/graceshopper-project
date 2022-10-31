@@ -8,10 +8,12 @@ const User = require("../db/models/User");
 router.get("/:id/cart", async (req, res, next) => {
   try {
     //get the cart by the id
+
+    console.log("req.params.id ", req.params.id);
     const cart = await Cart.findByPk(req.params.id);
     if (!cart) {
-      const cart = await Cart.create(req.body);
-      res.status(202).send(cart);
+      const cart = await Cart.create({ userId: req.params.id });
+      return res.status(202).json(cart);
     } else {
       res.json(cart);
     }
@@ -22,7 +24,15 @@ router.get("/:id/cart", async (req, res, next) => {
   //creates cart assigned to userId with the product passed in as req.body
   router.post("/:id/cart", async (req, res, next) => {
     try {
-      res.status(201).json(await Cart.create(req.body));
+      console.log(req.body);
+      const { userId } = req.body;
+      res.status(201).json(
+        await Cart.create({
+          where: {
+            userId: userId,
+          },
+        })
+      );
     } catch (err) {
       next(err);
     }
