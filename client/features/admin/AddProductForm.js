@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addProductAsync } from "../allProducts/ProductsSlice";
+import { addProductAsync, fetchProducts } from "../allProducts/ProductsSlice";
 
 const AddProductForm = () => {
   const [name, setName] = useState("");
@@ -17,6 +17,7 @@ const AddProductForm = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(addProductAsync(newProductData));
+    dispatch(fetchProducts())
     setName("");
     setType("");
     setPrice(0);
