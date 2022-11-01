@@ -29,6 +29,7 @@ router.get("/:id", async (req, res, next) => {
 // api route to delete one product based on req.params.id
 router.delete("/:id", async (req, res, next) => {
   try {
+    // o: always check for when you can't find the resource
     const product = await Product.findByPk(req.params.id);
     await product.destroy();
 
@@ -49,6 +50,7 @@ router.post("/", async (req, res, next) => {
 
 router.put("/:id", async (req, res, next) => {
   try {
+    // o: always check for when you can't find the resource
     const product = await Product.findByPk(req.params.id);
     await product.update(req.body);
     res.send(product);

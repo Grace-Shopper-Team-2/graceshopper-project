@@ -1,6 +1,8 @@
 import axios from "axios";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+// o: you probably want to avoid using this style of error handling in thunks...
+//  will explain in SM
 export const fetchUsers = createAsyncThunk("users", async () => {
   try {
       const { data } = await axios.get("/api/users");

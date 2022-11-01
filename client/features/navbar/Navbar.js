@@ -17,6 +17,7 @@ const Navbar = () => {
     navigate("/login");
   };
 
+  // o: looks like these two functions are not being used
   const allProductsPage = () => {
     dispatch(AllProducts());
     navigate("/products");

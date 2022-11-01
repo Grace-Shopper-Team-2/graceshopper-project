@@ -37,6 +37,7 @@ const Cart = () => {
 	return (
 		<div>
 			<h2>Shopping Cart</h2>
+			{/* o: correct me if I am wrong but is this duplicated code? */}
 			{cart.cartItems.length === 0 ? (
 				<div>
 					<p>Your Cart is Currently Empty !</p>

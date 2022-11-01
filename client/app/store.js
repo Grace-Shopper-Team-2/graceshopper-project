@@ -9,6 +9,7 @@ import cartForUserReducer from "../features/userCart/cartForUser";
 
 const store = configureStore({
   reducer: {
+    // o: why is the naming inconsistent here for all these reducers? 🤔
     allUsers: allUsersSlice,
     auth: authReducer,
     products: ProductsReducer,

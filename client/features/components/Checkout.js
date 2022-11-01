@@ -15,6 +15,8 @@ function Checkout() {
 	const shipping = '0.00';
 	const estimatedTaxes = cartTotalAmount * taxNY;
 	const total = estimatedTaxes + cartTotalAmount;
+
+	// o: remove if not needed
 	console.log(cartItems);
 
 	useEffect(() => {
@@ -39,6 +41,7 @@ function Checkout() {
 			<div id="order-details">
 				<h1>Order Details</h1>
 				<ul>
+					{/* o: destructuring is your friend */}
 					{cartItems.map((product) => (
 						<li key={product.id}>
 							<img src={product.imageUrl} />

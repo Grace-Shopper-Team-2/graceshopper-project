@@ -78,6 +78,8 @@ function AdminPage() {
       <div id="admin-all-users">
         <h1>Users</h1>
         <ol>
+          {/* o: you can just do a users?.length here for short and it will check
+                users for you before trying to run length */}
           {users && users.length ? (
             users.map((currentUser) => {
               return (

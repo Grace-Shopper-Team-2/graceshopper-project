@@ -16,8 +16,12 @@ const EditProductForm = () => {
     dispatch(fetchSingleProduct(productId));
   }, [dispatch]);
 
+  // o: destructuring singleProduct would help readability in this component
   let singleProduct = useSelector(selectSingleProduct);
-
+  
+  // o: if you destructure singleProduct above you can just do:
+  // let productData = { id, name, description, imageUrl, price } for short
+  // which you can probably just pass directly into line 34
   let productData = {
     id: singleProduct.id,
     name: singleProduct.name,
@@ -29,6 +33,8 @@ const EditProductForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     await dispatch(updateProductAsync(productData));
+    // o: I know this is commented out but you can avoid this by passing in productId
+    //  to the useEffect hook as a dependancy (in the array on line 17)
     // await dispatch(fetchSingleProduct(productId));
     navigate("/adminPage");
   };

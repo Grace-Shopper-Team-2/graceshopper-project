@@ -37,6 +37,7 @@ const Cart = () => {
 	return (
 		<div>
 			<h2>Shopping Cart</h2>
+			{/* o: might be best to separate the empty cart jsx and the other case into their own components  */}
 			{cart.cartItems.length === 0 ? (
 				<div>
 					<p>Your Cart is Currently Empty !</p>
@@ -60,6 +61,7 @@ const Cart = () => {
 					</div>
 				</div>
 			) : (
+				// o: you dont need a fragment here
 				<>
 					<div className="cart-nav">
 						<h3>Product</h3>

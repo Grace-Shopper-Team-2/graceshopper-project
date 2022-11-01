@@ -13,6 +13,10 @@ Cart.belongsTo(User);
 
 //Association between Cart and Product
 //one to many
+
+// o: this structure might be problematic for some of the Tier 2 stuff... will explain
+//  in SM... also the name should be camelCased since its the name of the table you
+//  are noting here
 Cart.belongsToMany(Product, { through: "cart_product" });
 Product.belongsToMany(Cart, { through: "cart_product" });
 
