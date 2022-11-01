@@ -20,6 +20,17 @@ Cart.belongsTo(User);
 Cart.belongsToMany(Product, { through: "cart_product" });
 Product.belongsToMany(Cart, { through: "cart_product" });
 
+// carts
+// ----
+// id: integer
+// quantity: integer
+
+// cart_products
+// -----
+// cartId: integer
+// productId: integer
+// quantity: integer
+
 module.exports = {
   db,
   models: {

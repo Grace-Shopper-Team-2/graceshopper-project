@@ -9,17 +9,17 @@ module.exports = router;
 
 // o: I'm assuming you tried to make this work but its not working yet? 🤔
 // app.use(express.json());
-// const requireToken = async (req, res, next) => {
-//   try {
-//     const token = req.headers.authorization;
-//     const user = await User.findByToken(token);
-//     console.log(user)
-//     req.user = user;
-//     next();
-//   } catch (ex) {
-//     next(ex);
-//   }
-// };
+const requireToken = async (req, res, next) => {
+  try {
+    const token = req.headers.authorization;
+    const user = await User.findByToken(token);
+    console.log(user)
+    req.user = user;
+    next();
+  } catch (ex) {
+    next(ex);
+  }
+};
 
 
 // o: let's talk about this in our SM 👇

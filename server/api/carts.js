@@ -45,6 +45,7 @@ router.get("/:id/cart", async (req, res, next) => {
   });
 
   //updates the cart with the product
+  // /api/carts/:id
   router.put("/:id/cart", async (req, res, next) => {
     try {
       // o: always check for when you can't find the resource
