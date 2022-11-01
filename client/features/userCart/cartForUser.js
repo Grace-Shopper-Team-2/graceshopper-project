@@ -12,19 +12,12 @@ const initialState = {
 export const addToUserCart = createAsyncThunk(
   "cart/add",
   async ({ product, userId }) => {
+    console.log(product, userId);
     try {
       //first check if cart exist by sending get request
-      const res = await axios.get(`api/user/${userId}/cart`);
-      console.log(res);
+      const { data } = await axios.put(`api/carts/${userId}`, { product });
 
-      if (res.data) {
-        const { data } = await axios.put(
-          `/api/user/${userId}/cart`,
-          product.id
-        );
-
-        return data;
-      }
+      return data;
     } catch (err) {
       console.error("adding to cart failed", err.message);
     }
