@@ -26,22 +26,12 @@ const EditProductForm = () => {
     price: singleProduct.price,
   };
 
-<<<<<<< HEAD
-  console.log("SINGLE PRODUCT:", productData);
-
-=======
->>>>>>> 9345b23158d301dfe60b1abc64cf3980b6504cb2
   const handleSubmit = async (event) => {
     event.preventDefault();
     await dispatch(updateProductAsync(productData));
     // await dispatch(fetchSingleProduct(productId));
     navigate("/adminPage");
   };
-<<<<<<< HEAD
-  
-=======
-
->>>>>>> 9345b23158d301dfe60b1abc64cf3980b6504cb2
   return (
     <div id="edit-products">
       <h1>Hello</h1>
