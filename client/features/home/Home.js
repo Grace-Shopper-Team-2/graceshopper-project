@@ -12,6 +12,19 @@ const Home = (props) => {
   return (
     <div>
       <h3>Welcome, {username}</h3>
+      <table>
+        <tr>
+          <th>
+            
+          </th>
+        </tr>
+
+        <tr>
+          <td>
+
+          </td>
+        </tr>
+      </table>
     </div>
   );
 };
