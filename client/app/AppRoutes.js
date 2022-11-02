@@ -3,6 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import AuthForm from "../features/auth/AuthForm";
 import Home from "../features/home/Home";
+
+import ProfilePage from "../features/profilePage/profilePage";
+
 import AllProducts from "../features/allProducts/AllProducts";
 import SingleProduct from "../features/singleProducts/SingleProduct";
 import AdminPage from "../features/admin/AdminPage";
@@ -10,6 +13,8 @@ import Cart from "../features/localCart/Cart";
 import EditProductForm from "../features/admin/EditProductsForm";
 import Checkout from "../features/checkout/Checkout";
 import PurchaseConfirmed from "../features/checkout/PurchaseConfirmed";
+import UserCart from "../features/userCart/UserCart";
+
 import { me } from "./store";
 
 /**
@@ -20,6 +25,7 @@ const AppRoutes = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   const isAdmin = useSelector((state) => state.auth.me.isAdmin);
   const dispatch = useDispatch();
+
 
   useEffect(() => {
     dispatch(me());
@@ -70,6 +76,7 @@ const AppRoutes = () => {
             element={<AuthForm name="signup" displayName="Sign Up" />}
           />
           <Route path="/products" element={<AllProducts />} />
+
           <Route path="/products/:productId/*" element={<SingleProduct />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />

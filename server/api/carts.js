@@ -14,26 +14,34 @@ router.get("/:id", loadUser, async (req, res, next) => {
     const cart = await Cart.findOrCreate({
       where: { userId: req.user.dataValues.id },
     });
-    console.log(req.user);
+
+
     res.status(200).json(cart);
   } catch (err) {
     next(err);
   }
 });
 
-router.post("/:id", loadUser, async (req, res, next) => {
+
+
+router.post("/:id", async (req, res, next) => {
+  console.log("req.body:", req.body);
+
   const { id } = req.body.product;
   try {
     const cart = await Cart.findOne({
       where: {
-        userId: req.user.dataValues.id,
+        userId: req.body.userId
       },
     });
-    console.log(cart);
+    console.log("cart found");
     if (cart) {
+      console.log("CART:",cart)
       const cartProducts = await CartProducts.create({
-        userId: req.user.dataValues.id,
-        id,
+        userId: req.body.userId,
+        productId:id,
+        quantity: 1
+
       });
       res.json(cartProducts);
     }
@@ -43,23 +51,27 @@ router.post("/:id", loadUser, async (req, res, next) => {
 });
 
 //updates the cart with the product
-router.put("/:id", loadUser, async (req, res, next) => {
+router.put("/:id", async (req, res, next) => {
+
   const { id } = req.body.product;
   try {
     const cartProducts = await CartProducts.findOne({
       where: {
-        userId: req.user.dataValues.id,
+
+        // userId: req.user.dataValues.id,
+        userId: req.body.userId,
       },
-      include: {
-        model: Product,
-        where: {
-          id: id,
-        },
-      },
+      // include: {
+      //   model: Product,
+      //   where: {
+      //     id: id,
+      //   },
+      // },
     });
-    cartProducts.update({
+    await cartProducts.update({
       where: {
-        userId: req.user.dataValues.id,
+        userId: req.body.userId,
+
         productId: id,
       },
     });

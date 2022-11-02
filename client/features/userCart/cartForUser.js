@@ -14,21 +14,30 @@ const TOKEN = "token";
 export const addToUserCart = createAsyncThunk(
   "cart/add",
   async ({ product, userId }) => {
+
     console.log(product, userId);
     const token = window.localStorage.getItem(TOKEN);
     try {
       if (token) {
         const res = await axios.get(`api/carts/${userId}`, {
+
           headers: {
             authorization: token,
           },
         });
+
+        console.log("cart created or found")
         if (res) {
+          console.log("res:",res)
+
           const { data } = await axios.post(`api/carts/${userId}`, {
             headers: {
               authorization: token,
             },
             product,
+
+            userId
+
           });
           return data;
         }
@@ -38,6 +47,8 @@ export const addToUserCart = createAsyncThunk(
     }
   }
 );
+
+
 
 //cart for user slice
 const cartForUserSlice = createSlice({
