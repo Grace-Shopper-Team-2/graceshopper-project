@@ -31,7 +31,7 @@ export const updateProductAsync = createAsyncThunk(
   "updateProduct",
   async (productData) => {
     try {
-      console.log(productData)
+      //console.log(productData)
       const { data } = await axios.put(
         `/api/products/${productData.id}`,
         productData
@@ -65,12 +65,11 @@ const productsSlice = createSlice({
     builder.addCase(fetchProducts.fulfilled, (state, action) => {
       return action.payload;
     });
-    builder.addCase(addProductAsync.fulfilled, (state, action)=>{
-      console.log(action)
+    builder.addCase(addProductAsync.fulfilled, (state, action) => {
+      console.log(action);
 
-      state.push(action.payload)
-
-    })
+      state.push(action.payload);
+    });
   },
 });
 

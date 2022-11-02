@@ -1,11 +1,21 @@
 import axios from "axios";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-export const fetchUsers = createAsyncThunk("users", async () => {
-  try {
-      const { data } = await axios.get("/api/users");
-      return data;
+const TOKEN = "token";
 
+export const fetchUsers = createAsyncThunk("users", async () => {
+  const token = window.localStorage.getItem(TOKEN);
+  try {
+    if (token) {
+      const res = await axios.get('/api/users', {
+        headers:{
+          authorization: token
+        }
+      })
+      return res.data;
+    }else{
+      return {};
+    }
   } catch (error) {
     return error.message;
   }

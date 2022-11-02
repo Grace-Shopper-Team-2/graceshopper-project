@@ -2,51 +2,70 @@ const router = require("express").Router();
 const Cart = require("../db/models/Cart");
 const Product = require("../db/models/Product");
 const User = require("../db/models/User");
+const CartProducts = require("../db/models/CartProducts");
+
+const { loadUser } = require("./middleware");
 
 //api route to get cart based on the userID
 //route is `api/user/:id/cart`
-router.get("/:id/cart", async (req, res, next) => {
+router.get("/:id", loadUser, async (req, res, next) => {
   try {
-    //get the cart by the id
+    //find or create the cart by the user id
+    const cart = await Cart.findOrCreate({
+      where: { userId: req.user.dataValues.id },
+    });
+    console.log(req.user);
+    res.status(200).json(cart);
+  } catch (err) {
+    next(err);
+  }
+});
 
-    console.log("req.params.id ", req.params.id);
-    const cart = await Cart.findByPk(req.params.id);
-    if (!cart) {
-      const cart = await Cart.create({ userId: req.params.id });
-      return res.status(202).json(cart);
-    } else {
-      res.json(cart);
+router.post("/:id", loadUser, async (req, res, next) => {
+  const { id } = req.body.product;
+  try {
+    const cart = await Cart.findOne({
+      where: {
+        userId: req.user.dataValues.id,
+      },
+    });
+    console.log(cart);
+    if (cart) {
+      const cartProducts = await CartProducts.create({
+        userId: req.user.dataValues.id,
+        id,
+      });
+      res.json(cartProducts);
     }
   } catch (err) {
     next(err);
   }
+});
 
-  //creates cart assigned to userId with the product passed in as req.body
-  router.post("/:id/cart", async (req, res, next) => {
-    try {
-      console.log(req.body);
-      const { userId } = req.body;
-      res.status(201).json(
-        await Cart.create({
-          where: {
-            userId: userId,
-          },
-        })
-      );
-    } catch (err) {
-      next(err);
-    }
-  });
-
-  //updates the cart with the product
-  router.put("/:id/cart", async (req, res, next) => {
-    try {
-      const cart = await Cart.findByPk(req.params.id);
-      res.json(await cart.createProduct(req.body));
-    } catch (error) {
-      next(error);
-    }
-  });
+//updates the cart with the product
+router.put("/:id", loadUser, async (req, res, next) => {
+  const { id } = req.body.product;
+  try {
+    const cartProducts = await CartProducts.findOne({
+      where: {
+        userId: req.user.dataValues.id,
+      },
+      include: {
+        model: Product,
+        where: {
+          id: id,
+        },
+      },
+    });
+    cartProducts.update({
+      where: {
+        userId: req.user.dataValues.id,
+        productId: id,
+      },
+    });
+  } catch (error) {
+    next(error);
+  }
 });
 
 module.exports = router;

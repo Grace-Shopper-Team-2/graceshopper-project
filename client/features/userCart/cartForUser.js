@@ -8,22 +8,30 @@ const initialState = {
   cartTotalAmount: 0,
 };
 
+const TOKEN = "token";
+
 //add items to user's cart based on userID
 export const addToUserCart = createAsyncThunk(
   "cart/add",
   async ({ product, userId }) => {
+    console.log(product, userId);
+    const token = window.localStorage.getItem(TOKEN);
     try {
-      //first check if cart exist by sending get request
-      const res = await axios.get(`api/user/${userId}/cart`);
-      console.log(res);
-
-      if (res.data) {
-        const { data } = await axios.put(
-          `/api/user/${userId}/cart`,
-          product.id
-        );
-
-        return data;
+      if (token) {
+        const res = await axios.get(`api/carts/${userId}`, {
+          headers: {
+            authorization: token,
+          },
+        });
+        if (res) {
+          const { data } = await axios.post(`api/carts/${userId}`, {
+            headers: {
+              authorization: token,
+            },
+            product,
+          });
+          return data;
+        }
       }
     } catch (err) {
       console.error("adding to cart failed", err.message);
@@ -38,15 +46,7 @@ const cartForUserSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(addToUserCart.fulfilled, (state, action) => {
-      const itemIndex = state.cartItems.findIndex(
-        (item) => item.id === action.payload.id
-      );
-      if (itemIndex >= 0) {
-        state.cartItems[itemIndex].cartQuantity++;
-      } else {
-        const tempProduct = { ...action.payload, cartQuantity: 1 };
-        state.cartItems.push(tempProduct);
-      }
+      state.cartItems.push(action.payload);
     });
   },
 });
