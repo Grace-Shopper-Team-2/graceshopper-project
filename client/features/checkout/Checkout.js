@@ -77,7 +77,7 @@ function Checkout() {
         </ul>
       </div>
       {stripeToken ? (
-        <span>Processing. Please wait</span>
+        <h2>Processing... Please wait</h2>
       ) : (
         <StripeCheckout
           name="Diagon Alley Shop"
