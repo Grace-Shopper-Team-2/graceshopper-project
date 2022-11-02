@@ -23,33 +23,35 @@ function Checkout() {
 
   const [stripeToken, setStripeToken] = useState(null);
 
+  const onToken = (token) => {
+    console.log(token);
+    setStripeToken(token);
+  };
+
   useEffect(() => {
     dispatch(getTotal());
   }, [products]);
 
   useEffect(() => {
     const makeRequest = async () => {
+      console.log(stripeToken);
       try {
-        const res = await axios.post("/api/checkout/payment", {
-          tokenId: stripeToken.id,
-          amount: total * 100,
-        });
+        const res = await axios.post(
+          "http://localhost:8080/api/checkout/payment",
+          {
+            tokenId: stripeToken.id,
+            amount: total * 100,
+          }
+        );
         console.log(res.data);
+        navigate("/purchase-confirmed");
+        dispatch(clearCart());
       } catch (err) {
         console.log(err);
       }
     };
+    stripeToken && makeRequest();
   }, [stripeToken]);
-
-  const handleClick = () => {
-    dispatch(clearCart());
-    navigate("/purchase-confirmed");
-  };
-
-  const onToken = (token) => {
-    console.log(token);
-    setStripeToken(token);
-  };
 
   return (
     <>
@@ -74,17 +76,21 @@ function Checkout() {
           ))}
         </ul>
       </div>
-      <StripeCheckout
-        name="Diagon Alley Shop"
-        image="https://image.shutterstock.com/image-vector/symbol-book-about-harry-potter-600w-2180800337.jpg"
-        billingAddress
-        shippingAddress
-        amount={total * 100}
-        token={onToken}
-        stripeKey={KEY}
-      >
-        <button onClick={() => handleClick()}>Make Payment</button>
-      </StripeCheckout>
+      {stripeToken ? (
+        <span>Processing. Please wait</span>
+      ) : (
+        <StripeCheckout
+          name="Diagon Alley Shop"
+          image="https://image.shutterstock.com/image-vector/symbol-book-about-harry-potter-600w-2180800337.jpg"
+          billingAddress
+          shippingAddress
+          amount={total * 100}
+          token={onToken}
+          stripeKey={KEY}
+        >
+          <button>Make Payment</button>
+        </StripeCheckout>
+      )}
     </>
   );
 }
