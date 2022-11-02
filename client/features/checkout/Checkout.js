@@ -40,7 +40,7 @@ function Checkout() {
           "http://localhost:8080/api/checkout/payment",
           {
             tokenId: stripeToken.id,
-            amount: total * 100,
+            amount: total.toFixed(2) * 100,
           }
         );
         console.log(res.data);
