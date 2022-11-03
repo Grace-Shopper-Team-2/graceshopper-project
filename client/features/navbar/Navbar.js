@@ -28,6 +28,7 @@ const Navbar = () => {
 		return total;
 	};
 
+
 	return (
 		<div>
 			{/* <h1 className="shop-name">Diagon Alley Shop</h1> */}
@@ -48,6 +49,7 @@ const Navbar = () => {
 									<Link to="/profilePage">Profile Page</Link>
 									<Link to="/products">Shops</Link>
 									<Link to="/adminPage">Admin Page</Link>
+                  <Link to="/user-cart">Cart</Link>
 									<button
 										type="button"
 										className="btn btn-light"
@@ -133,6 +135,7 @@ const Navbar = () => {
 			<hr />
 		</div>
 	);
+
 };
 
 export default Navbar;
