@@ -2,8 +2,10 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCartAsync } from "./cartForUser";
 import { Link } from "react-router-dom";
+import { useNavigate, userNavigate } from "react-router";
 
 const UserCart = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cartForUser);
   const userId = useSelector((state) => state.auth.me.id);
@@ -19,6 +21,15 @@ const UserCart = () => {
       return currentItem;
     }
   });
+  function getSubtotal(items) {
+    let result = 0;
+    items.forEach((item) => {
+      result += Number(item.productPrice);
+    });
+    return result;
+  }
+
+  const subTotal = getSubtotal(userItems);
   // console.log("userItems:", userItems[0]);
   return (
     <div id="user-cart">
@@ -27,7 +38,12 @@ const UserCart = () => {
       <div>
         {userItems.map((currentItem) => (
           <div key={currentItem.id}>
-            <img src={currentItem.imageUrl} alt={currentItem.productName} height= "100" width = "100"/>
+            <img
+              src={currentItem.imageUrl}
+              alt={currentItem.productName}
+              height="100"
+              width="100"
+            />
             <div>
               <h3>{currentItem.productName}</h3>
               {/* <button onClick={() => handleRemoveFromCart(cartItem)}>
@@ -53,11 +69,12 @@ const UserCart = () => {
         </button> */}
         <div className="check-out">
           <div className="subtotal">
-            <span>Subtotal</span>
+            <span>Subtotal: {subTotal.toFixed(2)}</span>
             {/* <span className="amount">${cart.cartTotalAmount}</span> */}
           </div>
           <p>Taxes and shipping</p>
           {/* <button onClick={() => navigate("/checkout")}>Check Out</button> */}
+          <button onClick={() => navigate("/usercheckout")}>Check Out</button>
           <div>
             <Link to="/products">
               <svg
