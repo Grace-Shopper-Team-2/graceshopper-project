@@ -18,24 +18,16 @@ export const fetchCartAsync = createAsyncThunk("cart/get", async (userId) => {
 export const addToUserCart = createAsyncThunk(
   "cart/add",
   async ({ product, userId }) => {
-
     const token = window.localStorage.getItem(TOKEN);
     try {
       if (token) {
         const res = await axios.get(`api/carts/${userId}`, {
-
           headers: {
             authorization: token,
           },
         });
-
-        if (res) {
-          console.log("res:",res)
-
-
         if (res) {
           console.log("res:", res);
-
           const { data } = await axios.post(`api/carts/${userId}`, {
             headers: {
               authorization: token,
@@ -66,17 +58,15 @@ export const getTotalAsync = createAsyncThunk("cart/get", async (id) => {});
 //cart for user slice
 const cartForUserSlice = createSlice({
   name: "cartForUser",
-  initialState:[],
+  initialState: [],
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(addToUserCart.fulfilled, (state, action) => {
       state.push(action.payload);
-
     });
-    builder.addCase(fetchCartAsync.fulfilled,(state, action)=>{
-      return action.payload
-
-    })
+    builder.addCase(fetchCartAsync.fulfilled, (state, action) => {
+      return action.payload;
+    });
   },
 });
 

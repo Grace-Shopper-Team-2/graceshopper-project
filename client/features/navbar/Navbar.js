@@ -65,6 +65,7 @@ const Navbar = () => {
               <Link to="/home">Home</Link>
               <Link to="/profilePage">Profile Page</Link>
               <Link to="/products">Shops</Link>
+              <Link to="/user-cart">Cart</Link>
 
               <button
                 type="button"
