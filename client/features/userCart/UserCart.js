@@ -2,12 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCartAsync } from "./cartForUser";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router";
-
 import { removeFromCartAsync, clearEntireCartAsync } from "./cartForUser";
-
-import { removeFromCartAsync, clearEntireCartAsync } from "./cartForUser";
-
 import { useNavigate, userNavigate } from "react-router";
 
 

@@ -21,10 +21,10 @@ const Home = (props) => {
       </section>
 
       <section className="about-us">
-        <div class="container">
-          <div class="row">
-            <div class="col"></div>
-            <image></image>
+        <div className="container">
+          <div className="row">
+            <div className="col"></div>
+            <img></img>
           </div>
         </div>
       </section>

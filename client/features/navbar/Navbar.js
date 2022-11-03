@@ -84,26 +84,26 @@ const Navbar = () => {
               <Link to="/home">Home</Link>
               <Link to="/login">Login</Link>
               <Link to="/signup">Sign Up</Link>
-              <div class="dropdown">
+              <div className="dropdown">
                 <button
-                  class="btn dropdown-toggle"
+                  className="btn dropdown-toggle"
                   type="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
                   Shops
                 </button>
-                <ul class="dropdown-menu">
+                <ul className="dropdown-menu">
                   <li>
                     <Link to="/products">Ollivanders </Link>
                   </li>
                   <li>
-                    <a class="dropdown-item disabled">
+                    <a className="dropdown-item disabled">
                       COMING SOON! - Weasleys’ Wizard Wheezes
                     </a>
                   </li>
                   <li>
-                    <a class="dropdown-item disabled">
+                    <a className="dropdown-item disabled">
                       COMING SOON! - Quality Quidditch Supplies
                     </a>
                   </li>
@@ -117,10 +117,10 @@ const Navbar = () => {
                 <div class="search">
                   <input
                     type={"text"}
-                    class="search-box"
+                    className="search-box"
                     placeholder="Search Magical Item"
                   />
-                  <button class="search-button">Search</button>
+                  <button className="search-button">Search</button>
                   {/* <a href="#">
                     <img src="images/cart.webp"></img> */}
                   {/* </a> */}
