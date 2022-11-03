@@ -19,24 +19,16 @@ export const fetchCartAsync = createAsyncThunk("cart/get", async (userId) => {
 export const addToUserCart = createAsyncThunk(
   "cart/add",
   async ({ product, userId }) => {
-
     const token = window.localStorage.getItem(TOKEN);
     try {
       if (token) {
         const res = await axios.get(`api/carts/${userId}`, {
-
           headers: {
             authorization: token,
           },
         });
-
-        if (res) {
-          console.log("res:",res)
-
-
         if (res) {
           console.log("res:", res);
-
           const { data } = await axios.post(`api/carts/${userId}`, {
             headers: {
               authorization: token,

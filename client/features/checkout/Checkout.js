@@ -43,7 +43,7 @@ function Checkout() {
             amount: total.toFixed(2) * 100,
           }
         );
-        console.log(res.data);
+
         navigate("/purchase-confirmed");
         dispatch(clearCart());
       } catch (err) {

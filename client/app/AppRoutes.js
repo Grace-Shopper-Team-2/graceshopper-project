@@ -32,7 +32,6 @@ const AppRoutes = () => {
   const isAdmin = useSelector((state) => state.auth.me.isAdmin);
   const dispatch = useDispatch();
 
-
   useEffect(() => {
     dispatch(me());
   }, []);
@@ -72,6 +71,7 @@ const AppRoutes = () => {
             <Route path="/products" element={<AllProducts />} />
             <Route path="/products/:productId" element={<SingleProduct />} />
             <Route path="/user-cart" element={<UserCart />} />
+            <Route path="/purchase-confirmed" element={<PurchaseConfirmed />} />
             <Route path="/profilePage" element={<ProfilePage />} />
 
           </Routes>
@@ -98,6 +98,7 @@ const AppRoutes = () => {
           <Route path="/products" element={<AllProducts />} />
 
           <Route path="/profilePage" element={<ProfilePage />} />
+
           <Route path="/products/:productId/*" element={<SingleProduct />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />

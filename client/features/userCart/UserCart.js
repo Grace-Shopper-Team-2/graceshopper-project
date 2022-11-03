@@ -2,6 +2,9 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCartAsync } from "./cartForUser";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
+
+import { removeFromCartAsync, clearEntireCartAsync } from "./cartForUser";
 
 import { removeFromCartAsync, clearEntireCartAsync } from "./cartForUser";
 
@@ -22,14 +25,16 @@ const UserCart = () => {
   // console.log("cart.items:",cart)
   const handleRemoveFromCart = async (id) => {
     await dispatch(removeFromCartAsync(id));
-    await dispatch(fetchCartAsync(userId))
+
+    await dispatch(fetchCartAsync(userId));
   };
 
-  const handleClearCart = async(id)=>{
-    console.log(id)
-    await dispatch(clearEntireCartAsync(id))
-    await dispatch(fetchCartAsync(userId))
-  }
+  const handleClearCart = async (id) => {
+    console.log(id);
+    await dispatch(clearEntireCartAsync(id));
+    await dispatch(fetchCartAsync(userId));
+  };
+
 
   let userItems = cart.filter((currentItem) => {
     if (currentItem.userId === userId) {
@@ -38,7 +43,7 @@ const UserCart = () => {
   });
 
 
-  let firstItem = userItems[0]
+  let firstItem = userItems[0];
 
 
   function getSubtotal(items) {
@@ -68,8 +73,10 @@ const UserCart = () => {
             <div>
               <h3>{currentItem.productName}</h3>
               <button onClick={() => handleRemoveFromCart(currentItem.id)}>
+
               Remove
             </button>
+
             </div>
             <div>${currentItem.productPrice}</div>
           </div>
@@ -85,7 +92,12 @@ const UserCart = () => {
         ${cartItem.price * cartItem.cartQuantity}
       </div> */}
       <div className="cart-summary">
-        <button className="clear-cart" onClick={() => handleClearCart(firstItem.id)}>
+
+        <button
+          className="clear-cart"
+          onClick={() => handleClearCart(firstItem.id)}
+        >
+
           Clear Cart
         </button>
         <div className="check-out">
