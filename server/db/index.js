@@ -6,7 +6,7 @@ const User = require("./models/User");
 const Product = require("./models/Product");
 const Cart = require("./models/Cart");
 
-const CartProduct = require("./models/CartProducts");
+const CartProduct = require("./models/cartProducts");
 
 //Association between User and Cart
 //one to one
