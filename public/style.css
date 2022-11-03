@@ -42,6 +42,8 @@ body {
   /* background: #cca435; */
   background: #7a5515;
   opacity: 0.8;
+  /* overflow: auto; */
+  /* margin-bottom: 0; */
 }
 
 .nav-bar:hover {
@@ -52,6 +54,7 @@ body {
   padding: 10px 10vw;
   display: flex;
   justify-content: space-between;
+  /* align-items: center; */
 }
 
 .nav-items {
@@ -62,6 +65,7 @@ body {
 .dropdown {
   display: flex;
   align-items: center;
+  margin-bottom: 20;
 }
 
 .search {
@@ -110,8 +114,11 @@ body {
   width: 100%;
   height: calc(100vh - 120px);
   /* height: auto; */
+  height: 800px;
+  /* display: block; */
   background-image: url("https://images.unsplash.com/photo-1548630826-2ec01a41f48f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1548&q=80");
-  background-size: cover;
+  /* background-size: cover; */
+  background-size: 100% 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -152,6 +159,50 @@ body {
   background-image: url(https://images.unsplash.com/photo-1551269901-5c5e14c25df7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469&q=80);
 }
 
+.login-text {
+  display: flex;
+  justify-content: right;
+  text-align: center;
+  margin-right: 50;
+}
+
+.btn-light {
+  margin-bottom: 50px;
+  background-color: rgb(207, 179, 114, 0.6) !important;
+  border-color: antiquewhite !important;
+}
+
+.product-button {
+}
+
+.product-name {
+  justify-content: left;
+  text-align: left;
+  background-color: rgba(204, 164, 53, 0.5);
+}
+
+.all-products {
+  background-color: rgba(207, 164, 72, 05);
+}
+
+.product-design-type {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.product-design {
+  justify-content: left;
+  text-align: left;
+  background-color: rgb(186, 157, 93);
+}
+
+.important {
+  color: red;
+}
+
+.mx-auto {
+  justify-content: right;
+}
 /* .homescreen {
   background-image: url("images/background.jpg");
 } */
@@ -164,6 +215,10 @@ body {
 
 button {
   font-family: "Julius Sans One", sans-serif;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 
 a {

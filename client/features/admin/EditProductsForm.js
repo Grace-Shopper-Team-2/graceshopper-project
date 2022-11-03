@@ -32,7 +32,6 @@ const EditProductForm = () => {
     // await dispatch(fetchSingleProduct(productId));
     navigate("/adminPage");
   };
-
   return (
     <div id="edit-products">
       <h1>Hello</h1>
