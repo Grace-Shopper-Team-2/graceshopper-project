@@ -65,15 +65,14 @@ export const editUser = createAsyncThunk(
 );
 
 const allUsersSlice = createSlice({
-	name: 'allUsers',
-	initialState: [],
-	reducers: {},
-	extraReducers: (builder) => {
-		builder.addCase(fetchUsers.fulfilled, (state, action) => {
-			console.log('ap', action.payload);
-			return action.payload;
-		});
-	},
+  name: "allUsers",
+  initialState: [],
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(fetchUsers.fulfilled, (state, action) => {
+      return action.payload;
+    });
+  },
 });
 
 export default allUsersSlice.reducer;
