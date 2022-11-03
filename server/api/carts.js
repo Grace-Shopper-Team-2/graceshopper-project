@@ -6,6 +6,29 @@ const CartProducts = require("../db/models/CartProducts");
 
 const { loadUser } = require("./middleware");
 
+router.get("/", async (req, res, next) => {
+  try {
+    const allCartProducts = await CartProducts.findAll();
+    res.json(allCartProducts);
+  } catch (error) {
+    next(error);
+  }
+});
+
+//api/carts/user/id
+router.get("/user/:id", async (req, res, next) => {
+  try {
+    const items = await CartProducts.findAll({
+      where: {
+        userId: req.params.id,
+      },
+    });
+    console.log("ROUTER USERS CART:", items);
+    res.json(items);
+  } catch (error) {
+    next(error);
+  }
+});
 //api route to get cart based on the userID
 //route is `api/user/:id/cart`
 router.get("/:id", loadUser, async (req, res, next) => {
@@ -25,23 +48,26 @@ router.get("/:id", loadUser, async (req, res, next) => {
 
 router.post("/:id", async (req, res, next) => {
   console.log("req.body:", req.body);
+  const { id, price, name, imageUrl } = req.body.product;
 
-  const { id } = req.body.product;
   try {
     const cart = await Cart.findOne({
       where: {
-        userId: req.body.userId
+        userId: req.body.userId,
       },
     });
     console.log("cart found");
     if (cart) {
-      console.log("CART:",cart)
+      console.log("CART:", cart);
       const cartProducts = await CartProducts.create({
         userId: req.body.userId,
-        productId:id,
-        quantity: 1
-
+        productId: id,
+        quantity: 1,
+        productName: name,
+        productPrice: price,
+        imageUrl: imageUrl,
       });
+      console.log("CART PRODUCTS:", cartProducts);
       res.json(cartProducts);
     }
   } catch (err) {
@@ -73,6 +99,16 @@ router.put("/:id", async (req, res, next) => {
         productId: id,
       },
     });
+  } catch (error) {
+    next(error);
+  }
+});
+
+//delete product by id
+router.delete("/:id", async (req, res, next) => {
+  try {
+    const item = await CartProducts.findByPk(req.params.id);
+    await item.destroy();
   } catch (error) {
     next(error);
   }
