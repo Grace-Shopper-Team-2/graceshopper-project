@@ -29,7 +29,7 @@ const Navbar = () => {
 
   return (
     <div>
-      {/* <h1 className="shop-name">Diagon Alley Shop</h1> */}
+      <div className="login-info"></div>
       <nav className="nav-bar">
         {isLoggedIn ? (
           isAdmin ? (
@@ -54,25 +54,68 @@ const Navbar = () => {
                   >
                     Logout
                   </button>
-                  <p>Logged in as: {username}</p>
+                  <h6>Logged in as: {username}</h6>
                 </div>
               </div>
             </div>
           ) : (
-            <div>
-              {/* The navbar will show these links after you log in */}
-              <Link to="/home">Home</Link>
-              <Link to="/profilePage">Profile Page</Link>
-              <Link to="/products">Shops</Link>
-
-              <button
-                type="button"
-                class="btn btn-light"
-                onClick={logoutAndRedirectHome}
-              >
-                Logout
-              </button>
-              <p>Logged in as: {username}</p>
+            <div className="login-info">
+              <div className="nav">
+                {/* The navbar will show these links after you log in */}
+                <Link to="/home">Home</Link>
+                <Link to="/profilePage">Profile Page</Link>
+                <div class="dropdown">
+                  <button
+                    class="btn dropdown-toggle"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    Shops
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <Link to="/products">Ollivanders </Link>
+                    </li>
+                    <li>
+                      <a class="dropdown-item disabled">
+                        COMING SOON! - Weasleys’ Wizard Wheezes
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item disabled">
+                        COMING SOON! - Quality Quidditch Supplies
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <Link to="/cart">
+                  {" "}
+                  {`Cart (${totalNumOfItemsInCart(cart.cartItems)})`}{" "}
+                </Link>
+                <div className="nav-items">
+                  <div class="search">
+                    <input
+                      type={"text"}
+                      class="search-box"
+                      placeholder="Search Magical Item"
+                    />
+                    <button class="search-button">Search</button>
+                  </div>
+                </div>
+                <div className="login-text">
+                  <p> Logged in as: {username}</p>
+                  <br />
+                  <button
+                    className="login-button"
+                    type="button"
+                    class="btn btn-outline-light btn-sm rounded mr-2"
+                    onClick={logoutAndRedirectHome}
+                  >
+                    Logout
+                  </button>
+                </div>
+              </div>
             </div>
           )
         ) : (
@@ -119,9 +162,6 @@ const Navbar = () => {
                     placeholder="Search Magical Item"
                   />
                   <button class="search-button">Search</button>
-                  {/* <a href="#">
-                    <img src="images/cart.webp"></img> */}
-                  {/* </a> */}
                 </div>
               </div>
             </div>
