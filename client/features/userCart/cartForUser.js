@@ -14,6 +14,7 @@ export const fetchCartAsync = createAsyncThunk("cart/get", async (userId) => {
   console.log(data);
   return data;
 });
+
 //add items to user's cart based on userID
 export const addToUserCart = createAsyncThunk(
   "cart/add",
@@ -44,16 +45,32 @@ export const addToUserCart = createAsyncThunk(
   }
 );
 
+
+
 export const getTotalAsync = createAsyncThunk("cart/get", async (id) => {});
 
-// export const removeFromCartAsync = createAsyncThunk(
-//   "cart/remove",
-//   async(id)=>{
-//     try{
-//       const {data} = await axios.delete(`/api/`)
-//     }
-//   }
-// )
+export const removeFromCartAsync = createAsyncThunk(
+  "cart/remove",
+  async (id) => {
+    try {
+      const { data } = await axios.delete(`/api/carts/allItems/${id}`);
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
+
+export const clearEntireCartAsync = createAsyncThunk("cart/clear", async(id)=>{
+  try {
+    const { data } = await axios.delete(`/api/carts/allItems/${id}`);
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+)
+
 
 //cart for user slice
 const cartForUserSlice = createSlice({

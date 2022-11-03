@@ -18,7 +18,7 @@ function Checkout() {
   }
 
   const products = useSelector((state) => state.cartForUser);
-  console.log(products);
+
   const subTotal = getSubtotal(products);
   const taxNY = 0.08;
   const shipping = "0.00";
@@ -82,6 +82,7 @@ function Checkout() {
           ))}
         </ul>
       </div>
+
       {stripeToken ? (
         <h2>Processing... Please wait</h2>
       ) : (

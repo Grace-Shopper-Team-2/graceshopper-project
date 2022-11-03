@@ -23,12 +23,23 @@ router.get("/user/:id", async (req, res, next) => {
         userId: req.params.id,
       },
     });
-    console.log("ROUTER USERS CART:", items);
+
     res.json(items);
   } catch (error) {
     next(error);
   }
 });
+
+// router.delete("/user/:id", async(req,res,next)=>{
+//   console.log("H")
+//   const items = await CartProducts.findAll({
+//     where: {
+//       userId: req.params.id,
+//     },
+//   });
+
+//   console.log("DELETE ALL",items)
+// })
 //api route to get cart based on the userID
 //route is `api/user/:id/cart`
 router.get("/:id", loadUser, async (req, res, next) => {
@@ -47,7 +58,6 @@ router.get("/:id", loadUser, async (req, res, next) => {
 
 
 router.post("/:id", async (req, res, next) => {
-  console.log("req.body:", req.body);
   const { id, price, name, imageUrl } = req.body.product;
 
   try {
@@ -56,9 +66,7 @@ router.post("/:id", async (req, res, next) => {
         userId: req.body.userId,
       },
     });
-    console.log("cart found");
     if (cart) {
-      console.log("CART:", cart);
       const cartProducts = await CartProducts.create({
         userId: req.body.userId,
         productId: id,
@@ -67,7 +75,6 @@ router.post("/:id", async (req, res, next) => {
         productPrice: price,
         imageUrl: imageUrl,
       });
-      console.log("CART PRODUCTS:", cartProducts);
       res.json(cartProducts);
     }
   } catch (err) {
@@ -104,11 +111,22 @@ router.put("/:id", async (req, res, next) => {
   }
 });
 
+// had to set up strange routes below due to time constraints
+router.get("/allItems/:id", async (req,res,next)=>{
+  try{
+    console.log(req.params)
+    const  item = await CartProducts.findByPk(req.params.id);
+    res.send(item)
+  }catch(error){
+    console.error(error)
+  }
+})
 //delete product by id
-router.delete("/:id", async (req, res, next) => {
+router.delete("/allItems/:id", async (req, res, next) => {
   try {
     const item = await CartProducts.findByPk(req.params.id);
     await item.destroy();
+    res.send(item);
   } catch (error) {
     next(error);
   }
