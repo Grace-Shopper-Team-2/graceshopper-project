@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../app/store";
 import AdminPage from "../admin/AdminPage";
+import UserCart from "../userCart/UserCart";
 
 const Navbar = () => {
   const cart = useSelector((state) => state.cart);

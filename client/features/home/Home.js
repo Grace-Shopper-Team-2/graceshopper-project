@@ -16,10 +16,10 @@ const Home = () => {
         <p>Your online source for all your witch and wizard needs</p>
       </div>
       <section className="about-us">
-        <div class="container">
-          <div class="row">
-            <div class="col"></div>
-            <image></image>
+        <div className="container">
+          <div className="row">
+            <div className="col"></div>
+            <img></img>
           </div>
         </div>
       </section>
