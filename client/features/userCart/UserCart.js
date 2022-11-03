@@ -6,6 +6,11 @@ import { useNavigate } from "react-router";
 
 import { removeFromCartAsync, clearEntireCartAsync } from "./cartForUser";
 
+import { removeFromCartAsync, clearEntireCartAsync } from "./cartForUser";
+
+import { useNavigate, userNavigate } from "react-router";
+
+
 const UserCart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -20,6 +25,7 @@ const UserCart = () => {
   // console.log("cart.items:",cart)
   const handleRemoveFromCart = async (id) => {
     await dispatch(removeFromCartAsync(id));
+
     await dispatch(fetchCartAsync(userId));
   };
 
@@ -29,13 +35,16 @@ const UserCart = () => {
     await dispatch(fetchCartAsync(userId));
   };
 
+
   let userItems = cart.filter((currentItem) => {
     if (currentItem.userId === userId) {
       return currentItem;
     }
   });
 
+
   let firstItem = userItems[0];
+
 
   function getSubtotal(items) {
     let result = 0;
@@ -64,8 +73,10 @@ const UserCart = () => {
             <div>
               <h3>{currentItem.productName}</h3>
               <button onClick={() => handleRemoveFromCart(currentItem.id)}>
-                Remove
-              </button>
+
+              Remove
+            </button>
+
             </div>
             <div>${currentItem.productPrice}</div>
           </div>
@@ -81,10 +92,12 @@ const UserCart = () => {
         ${cartItem.price * cartItem.cartQuantity}
       </div> */}
       <div className="cart-summary">
+
         <button
           className="clear-cart"
           onClick={() => handleClearCart(firstItem.id)}
         >
+
           Clear Cart
         </button>
         <div className="check-out">

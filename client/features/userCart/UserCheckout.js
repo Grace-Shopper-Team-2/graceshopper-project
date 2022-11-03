@@ -1,9 +1,11 @@
+
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
+
 
 function Checkout() {
   const dispatch = useDispatch();
@@ -24,6 +26,7 @@ function Checkout() {
   const shipping = "0.00";
   const estimatedTaxes = subTotal * taxNY;
   const total = estimatedTaxes + subTotal;
+
 
   const KEY =
     "pk_test_51LziHZFLqGJqqYYSJk8WVS0XkhQm3P6TIHKmTdE0PXhnv7wUZ4xDq95E6DiGAoR9PnaTkdJ2MruybnvfT4IenhJs005PYU6VZ4";
@@ -54,6 +57,7 @@ function Checkout() {
     stripeToken && makeRequest();
   }, [stripeToken]);
 
+
   const handleClick = () => {
     dispatch();
     navigate("/purchase-confirmed");
@@ -83,6 +87,7 @@ function Checkout() {
         </ul>
       </div>
 
+
       {stripeToken ? (
         <h2>Processing... Please wait</h2>
       ) : (
@@ -98,6 +103,9 @@ function Checkout() {
           <button>Make Payment</button>
         </StripeCheckout>
       )}
+
+      <button onClick={() => handleClick()}>Confirm Purchase</button>
+
     </>
   );
 }
