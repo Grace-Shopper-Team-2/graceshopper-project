@@ -2,7 +2,7 @@ const router = require("express").Router();
 const Cart = require("../db/models/Cart");
 const Product = require("../db/models/Product");
 const User = require("../db/models/User");
-const CartProducts = require("../db/models/CartProducts");
+const CartProducts = require("../db/models/cartProducts");
 
 const { loadUser } = require("./middleware");
 
