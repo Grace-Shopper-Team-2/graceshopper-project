@@ -37,15 +37,19 @@ router.get("/:id", loadUser, async (req, res, next) => {
     const cart = await Cart.findOrCreate({
       where: { userId: req.user.dataValues.id },
     });
+
+    console.log(req.user);
     res.status(200).json(cart);
   } catch (err) {
     next(err);
   }
 });
 
+
 router.post("/:id", async (req, res, next) => {
   console.log("req.body:", req.body);
   const { id, price, name, imageUrl } = req.body.product;
+
   try {
     const cart = await Cart.findOne({
       where: {
@@ -73,6 +77,7 @@ router.post("/:id", async (req, res, next) => {
 
 //updates the cart with the product
 router.put("/:id", async (req, res, next) => {
+
   const { id } = req.body.product;
   try {
     const cartProducts = await CartProducts.findOne({
@@ -90,6 +95,7 @@ router.put("/:id", async (req, res, next) => {
     await cartProducts.update({
       where: {
         userId: req.body.userId,
+
         productId: id,
       },
     });

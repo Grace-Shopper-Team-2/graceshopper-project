@@ -2,7 +2,11 @@ const path = require("path");
 const express = require("express");
 const morgan = require("morgan");
 const app = express();
+const cors = require("cors");
 module.exports = app;
+
+//cors for stripe
+app.use(cors());
 
 // logging middleware
 app.use(morgan("dev"));

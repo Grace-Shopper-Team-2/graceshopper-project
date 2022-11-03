@@ -6,7 +6,9 @@
 
 body {
   /* font-family: sans-serif; */
-  font-family: "Cinzel Decorative", cursive;
+  /* font-family: "Cinzel Decorative", cursive; */
+  font-family: "Julius Sans One", sans-serif;
+  color: black;
   /* background-color: black; */
 }
 
@@ -29,13 +31,82 @@ body {
   font-family: "Julius Sans One", sans-serif;
   /* font-size: larger; */
   font-weight: bolder;
+  color: azure;
   position: sticky;
+  top: 0;
+  left: 0;
   height: 100%;
   width: 100%;
-  background: #cca435;
+  z-index: 9;
+  transition: 0.5s;
+  /* background: #cca435; */
+  background: #7a5515;
+  opacity: 0.8;
 }
 
-.hero-section {
+.nav-bar:hover {
+  background: gray;
+}
+
+.nav {
+  padding: 10px 10vw;
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-items {
+  display: flex;
+  align-items: center;
+}
+
+.dropdown {
+  display: flex;
+  align-items: center;
+}
+
+.search {
+  width: 500px;
+  /* height: 50px; */
+  display: flex;
+}
+
+.search-box {
+  width: 60%;
+  height: 40px;
+  padding: 10px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border: 1px solid whitesmoke;
+  text-transform: capitalize;
+  font-family: "Julius Sans One", sans-serif;
+  background: none;
+  color: black;
+  outline: none;
+}
+
+.search-box::placeholder {
+  color: #8096a8;
+}
+
+.search-button {
+  width: 20%;
+  height: 40px;
+  padding: 10px 20px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: #cca435;
+  font-size: 15px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.nav-items a {
+  width: 3px;
+  height: 3px;
+}
+
+.home-section {
   width: 100%;
   height: calc(100vh - 120px);
   /* height: auto; */
@@ -47,7 +118,38 @@ body {
 }
 
 .home-page-title {
-  background-color: aliceblue;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  font-size: 50px;
+  background-color: rgba(158, 119, 33, 0.6);
+  background-size: 50px;
+  /* color: #a35c1a; */
+  color: black;
+  border: #cca435;
+  border-width: 4px;
+  border-style: double;
+  padding: 3px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.home-page-title:hover {
+  background-color: antiquewhite;
+}
+
+.home-content p {
+  font-size: 20px;
+  font-weight: 900px;
+  background-color: rgba(158, 119, 33, 0.6);
+}
+
+.about-us {
+  /* width: 100%; */
+  /* height: calc(100vh - 120px); */
+  background-image: url(https://images.unsplash.com/photo-1551269901-5c5e14c25df7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469&q=80);
 }
 
 /* .homescreen {
