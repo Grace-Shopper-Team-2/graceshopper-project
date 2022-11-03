@@ -1,29 +1,27 @@
-const router = require("express").Router();
+const router = require('express').Router();
 
 const {
-  models: { User },
-} = require("../db");
+	models: { User },
+} = require('../db');
 module.exports = router;
 
-
-router.get("/", async (req, res, next) => {
-  try {
-    const token = req.headers.authorization
-    if(token){
-      const users = await User.findAll({
-        // explicitly select only the id and username fields - even though
-        // users' passwords are encrypted, it won't help if we just
-        // send everything to anyone who asks!
-        attributes: ["id", "username"],
-      });
-      res.send(users);
-    }else{
-      res.send("forbidden")
-    }
-
-  } catch (err) {
-    next(err);
-  }
+router.get('/', async (req, res, next) => {
+	try {
+		const token = req.headers.authorization;
+		if (token) {
+			const users = await User.findAll({
+				// explicitly select only the id and username fields - even though
+				// users' passwords are encrypted, it won't help if we just
+				// send everything to anyone who asks!
+				attributes: ['id', 'username'],
+			});
+			res.send(users);
+		} else {
+			res.send('forbidden');
+		}
+	} catch (err) {
+		next(err);
+	}
 });
 
 //find one specific user info
@@ -39,25 +37,47 @@ router.get("/", async (req, res, next) => {
 //   }
 // });
 
+//find one user - api/users/:id
+router.get('/:id', async (req, res, next) => {
+	try {
+		const user = await User.findByPk(req.params.id);
+		res.json(user);
+	} catch (error) {
+		next(error);
+	}
+});
+
 // create users
-router.post("/", async (req, res, next) => {
-  try {
-    const user = await User.create(req.body);
-    res.json(user);
-  } catch (err) {
-    next(err);
-  }
+router.post('/', async (req, res, next) => {
+	try {
+		const user = await User.create(req.body);
+		res.json(user);
+	} catch (err) {
+		next(err);
+	}
+});
+
+// api/users/edit - edit user
+router.put('/:id', async (req, res, next) => {
+	try {
+		console.log('body', req.body);
+		const user = await User.findByPk(req.params.id);
+		await user.update(req.body);
+		res.json(user);
+	} catch (error) {
+		next(error);
+	}
 });
 
 // delete user by id
-router.delete("/:id", async (req, res, next) => {
-  try {
-    const user = await User.findByPk(req.params.id, {
-      attributes: ["id", "username"],
-    });
-    await user.destroy();
-    res.send(user);
-  } catch (error) {
-    next(error);
-  }
+router.delete('/:id', async (req, res, next) => {
+	try {
+		const user = await User.findByPk(req.params.id, {
+			attributes: ['id', 'username'],
+		});
+		await user.destroy();
+		res.send(user);
+	} catch (error) {
+		next(error);
+	}
 });
